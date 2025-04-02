@@ -1,0 +1,141 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+.container {
+    max-width: 700px;
+    margin: 50px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.input-container {
+    display: flex;
+    gap: 10px;
+}
+
+input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="checkbox"] {
+    width: 50px; /* Adjust width */
+    height: 50px; /* Adjust height */
+    cursor: pointer; /* Add pointer cursor for better UX */
+    accent-color: #848484; /* Match the button color */
+    border-radius: 3px; /* Optional: Add rounded corners */
+}
+
+button {
+    padding: 10px 15px;
+    background: #848484;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:disabled
+{
+    background: #dcdcdc;
+    color: gray;
+}
+
+button:enabled:hover {
+    background: #c2c2c2;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul task {
+    margin-bottom: 15px; /* Add vertical spacing between list items */
+}
+
+task {
+    width: 80%; /* Takes 80% of the parent div's width */
+    min-height: 50px; /* Fixed height */
+    position: relative; /* For positioning child elements */
+    margin: auto; /* Center the task div horizontally */
+    border: 2px solid rgb(48, 48, 48);
+    padding: 10px;
+    overflow: auto;
+    display: flex; /* Arrange child elements in a row */
+    align-items: center; /* Vertically center the child elements */
+    justify-content: space-between; /* Space out the child elements */
+    background: #d8d8d8;
+}
+
+div.taskFrontDiv {
+    position: relative; /* Use relative positioning for flex alignment */
+    width: 50px; /* Fixed width */
+    height: 100%; /* Matches the height of the task div */
+    margin-right: auto; /* Push other elements to the right */
+}
+
+div.taskMidDiv {
+    width: 50%; /* Automatically adjust width based on remaining space */
+    height: auto; /* Expand downwards when content grows */
+    min-height: 100%; /* Matches the height of the task div initially */
+    background-color: white;
+    word-break: break-all;
+
+}
+
+div.taskEndDiv {
+    position: relative; /* Use relative positioning for flex alignment */
+    width: 50px; /* Fixed width */
+    height: 100%; /* Matches the height of the task div */
+    margin-left: auto; /* Push other elements to the left */
+}
+
+.completed {
+    text-decoration: line-through;
+    color: rgb(55, 90, 69);
+    background: #d3ded3;
+}
+
+
+
+
+/* snippet for an auto-growing textarea from https://codepen.io/chriscoyier/pen/XWKEVLy */
+.grow-wrap {
+    /* easy way to plop the elements on top of each other and have them both sized based on the tallest one's height */
+    display: grid;
+  }
+  .grow-wrap::after {
+    /* Note the weird space! Needed to preventy jumpy behavior */
+    content: attr(data-replicated-value) " ";
+  
+    /* This is how textarea text behaves */
+    white-space: pre-wrap;
+  
+    /* Hidden from view, clicks, and screen readers */
+    visibility: hidden;
+  }
+  .grow-wrap > textarea {
+    /* You could leave this, but after a user resizes, then it ruins the auto sizing */
+    resize: none;
+  
+    /* Firefox shows scrollbar on growth, you can hide like this. */
+    overflow: hidden;
+  }
+  .grow-wrap > textarea,
+  .grow-wrap::after {
+    /* Identical styling required!! */
+    border: 1px solid black;
+    padding: 0.5rem;
+    font: inherit;
+  
+    /* Place on top of each other */
+    grid-area: 1 / 1 / 2 / 2;
+  }
