@@ -62,6 +62,7 @@ ul task {
 }
 
 task {
+    transition: all 0.3s ease; /* Smooth transition for all properties */
     width: 80%; /* Takes 80% of the parent div's width */
     min-height: 50px; /* Fixed height */
     position: relative; /* For positioning child elements */
@@ -109,7 +110,7 @@ div.taskEndDiv {
     position:absolute;
     width:"100px";
     z-index: 9;
-    transform-origin: center right;
+    /* transform-origin: center right; */
     rotate: -5deg;
 }
 

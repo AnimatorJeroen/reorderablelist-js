@@ -85,6 +85,9 @@ function findDropTarget(mouseY, elem, dummyTask, dropTargetLine)
 
 function onDragMove(event, elem, dropTargetLine, dummyTask)
 {
+  elem.style.transition ="none";
+
+  
   event.preventDefault();
   const dragDeltaX = event.clientX - dragging_startPosX;
   const dragDeltaY = event.clientY - dragging_startPosY;
@@ -102,22 +105,53 @@ function onDragMove(event, elem, dropTargetLine, dummyTask)
 
 function onDragEnd(event, elem, dummyTask, dropTargetLine)
 {
-
-  dummyTask.remove();
+  
+  
   dropTargetLine.remove();
-  elem.style.left = 0;
-  elem.style.top = 0;
+
+
+
   document.onmousemove = null;
   document.onmouseup = null;
 
+  //move to new location in absolute space first, with animation. then insert and remove the dragging effect
+  elem.style.transition = "";
+  elem.classList.remove("dragging");
+  
   if(target != null)
   {
-    console.log("place");
-      taskList.insertBefore(elem, isAbove ? target : target.nextSibling);
+    taskList.insertBefore(dummyTask, isAbove ? target : target.nextSibling);
   }
+  elem.style.zIndex = "9";
+  elem.style.position = "absolute";
+  elem.style.transformOrigin = "center";
+  elem.style.left = dummyTask.getBoundingClientRect().left + "px";
+  elem.style.top = dummyTask.getBoundingClientRect().top + "px";
 
-  elem.classList.remove("dragging");
-  elem.style.width = ""; // Reset width to allow dynamic resizing
+  
+  // Wait for the animation duration before proceeding
+  const animationDuration = parseFloat(window.getComputedStyle(elem).transitionDuration) * 1000 || 0;
+  setTimeout(() => {
+    elem.style.zIndex = "";
+    elem.style.position = "";
+    elem.style.left = "";
+    elem.style.top = "";
+    elem.style.width = ""; // Reset width to allow dynamic resizing
+    
+
+    if (target != null) {
+      console.log("place");
+      taskList.insertBefore(elem, isAbove ? target : target.nextSibling);
+    }
+
+    dummyTask.remove();
+    
+    elem.style.left = "";
+    elem.style.top = "";
+    elem.style.width = ""; // Reset width to allow dynamic resizing
+    elem.classList.remove("dragging");
+
+  }, animationDuration);
 }
 
 function makeDragable(elem, clickElem)
