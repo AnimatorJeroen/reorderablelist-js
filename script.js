@@ -24,6 +24,7 @@ function onDragBegin(event, elem)
   //insert a temp placeholder
   const dummyTask = document.createElement("task");
   dummyTask.classList.add("dragDummy");
+  dummyTask.style.height = window.getComputedStyle(elem).height;
   taskList.insertBefore(dummyTask, elem);
   const dropTargetLine = document.createElement("dropTarget");
   taskList.insertBefore(dropTargetLine, elem);
