@@ -17,8 +17,8 @@ function onDragBegin(event, elem)
 
   const computedStyleWidth = window.getComputedStyle(elem).width;
 
-  startOffsetTop = elem.offsetTop;
-  startOffsetLeft = elem.offsetLeft;
+  startOffsetTop = elem.getBoundingClientRect().top;
+  startOffsetLeft = elem.getBoundingClientRect().left;
   elem.classList.add("dragging");
 
   //insert a temp placeholder
@@ -105,39 +105,25 @@ function onDragMove(event, elem, dropTargetLine, dummyTask)
 
 function onDragEnd(event, elem, dummyTask, dropTargetLine)
 {
-  
-  
+
   dropTargetLine.remove();
-
-
-
   document.onmousemove = null;
   document.onmouseup = null;
 
-  //move to new location in absolute space first, with animation. then insert and remove the dragging effect
-  elem.style.transition = "";
-  elem.classList.remove("dragging");
-  
+
   if(target != null)
   {
     taskList.insertBefore(dummyTask, isAbove ? target : target.nextSibling);
   }
-  elem.style.zIndex = "9";
-  elem.style.position = "absolute";
-  elem.style.transformOrigin = "center";
+  elem.style.transition = "all 0.3s ease";
+  elem.style.rotate = "0deg";
   elem.style.left = dummyTask.getBoundingClientRect().left + "px";
-  elem.style.top = dummyTask.getBoundingClientRect().top + "px";
+  elem.style.top = (dummyTask.getBoundingClientRect().top) + "px";
 
   
   // Wait for the animation duration before proceeding
   const animationDuration = parseFloat(window.getComputedStyle(elem).transitionDuration) * 1000 || 0;
   setTimeout(() => {
-    elem.style.zIndex = "";
-    elem.style.position = "";
-    elem.style.left = "";
-    elem.style.top = "";
-    elem.style.width = ""; // Reset width to allow dynamic resizing
-    
 
     if (target != null) {
       console.log("place");
@@ -149,6 +135,8 @@ function onDragEnd(event, elem, dummyTask, dropTargetLine)
     elem.style.left = "";
     elem.style.top = "";
     elem.style.width = ""; // Reset width to allow dynamic resizing
+    elem.style.rotate = "";
+    elem.style.transition = "";
     elem.classList.remove("dragging");
 
   }, animationDuration);

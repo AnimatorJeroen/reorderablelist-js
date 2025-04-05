@@ -107,7 +107,7 @@ div.taskEndDiv {
 }
 
 .dragging {
-    position:absolute;
+    position:fixed;
     width:"100px";
     z-index: 9;
     /* transform-origin: center right; */
