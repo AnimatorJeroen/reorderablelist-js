@@ -1,0 +1,16 @@
+
+
+dragableListItem {
+    transition: all 0.3s ease; /* Smooth transition for all properties */
+    width: 80%; /* Takes 80% of the parent div's width */
+    min-height: 50px; /* Fixed height */
+    position: relative; /* For positioning child elements */
+    margin: auto; /* Center the task div horizontally */
+    border: 2px solid rgb(48, 48, 48);
+    padding: 10px;
+    overflow: auto;
+    display: flex; /* Arrange child elements in a row */
+    align-items: center; /* Vertically center the child elements */
+    justify-content: space-between; /* Space out the child elements */
+    background: #d8d8d8;
+}

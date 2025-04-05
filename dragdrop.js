@@ -158,7 +158,40 @@ function onDragEnd(event, elem, dummyTask, dropTargetLine)
   }, animationDuration);
 }
 
-export function makeDragable(elem, clickElem)
+function makeDragable(elem, clickElem)
 {
   clickElem.addEventListener("mousedown", (event) => { onDragBegin(event, elem); });
 }
+
+
+export function addTask() {
+    const taskName = taskInput.value.trim();
+    if (taskName == "")
+      return;
+  
+    //add elements
+    const newTask = document.createElement("task");
+    newTask.innerHTML = 
+    `
+    <div class="taskFrontDiv">
+    <input type="checkbox" class="check" id="checkbox" name="checkbox">
+    </div>
+    <div class="taskMidDiv">
+    <div class="grow-wrap">
+      <textarea name="text" class ="inputText" id="text" onInput="this.parentNode.dataset.replicatedValue = this.value"> ${taskName} </textarea>
+    </div>
+    </div>
+    <div class="taskEndDiv">
+    <button class="deleteButton">❌</button>
+    <button class="dragButton">||</button>
+    </div>
+    `;
+  
+    //add listeners
+    newTask.querySelector(".check").addEventListener("click", () => { newTask.classList.toggle("completed"); });
+    newTask.querySelector(".deleteButton").addEventListener("click", () => { newTask.remove(); });
+    makeDragable(newTask, newTask.querySelector(".dragButton"));
+  
+    taskInput.value = "";
+    taskList.prepend(newTask);
+  }
