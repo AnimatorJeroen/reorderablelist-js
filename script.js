@@ -15,6 +15,9 @@ function onDragBegin(event, elem)
   isAbove = false;
   yPosition = 0;
 
+  //fix the height during dragging to prevent scrollbar jumping
+  taskList.style.height = taskList.offsetHeight + "px";
+
   const computedStyleWidth = window.getComputedStyle(elem).width;
 
   startOffsetTop = elem.getBoundingClientRect().top;
@@ -83,6 +86,7 @@ function findDropTarget(mouseY, elem, dummyTask, dropTargetLine)
   return {target, isAbove, yPosition};
 }
 
+let scrollInterval = null;
 function onDragMove(event, elem, dropTargetLine, dummyTask)
 {
   elem.style.transition ="none";
@@ -100,6 +104,20 @@ function onDragMove(event, elem, dropTargetLine, dummyTask)
   if(target != null)
     dropTargetLine.style.top = yPosition;
     
+
+    // Auto-scroll logic
+    const scrollThreshold = 50; // Distance from the edge of the viewport to trigger scrolling
+
+    if (mouseY < scrollThreshold || mouseY > window.innerHeight - scrollThreshold) {
+
+      if(!scrollInterval){
+        const scrollSpeed = mouseY < scrollThreshold ? -10 : 10; // Pixels to scroll per frame
+        scrollInterval = setInterval( () => {window.scrollBy(0, scrollSpeed);}, 16);
+      }
+    } else if (scrollInterval) {
+    clearInterval(scrollInterval);
+    scrollInterval = null;
+    }
 
 }
 
@@ -138,6 +156,7 @@ function onDragEnd(event, elem, dummyTask, dropTargetLine)
     elem.style.rotate = "";
     elem.style.transition = "";
     elem.classList.remove("dragging");
+    taskList.style.height = "";
 
   }, animationDuration);
 }
