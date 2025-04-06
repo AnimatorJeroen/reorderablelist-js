@@ -12,5 +12,13 @@ dragableListItem {
     display: flex; /* Arrange child elements in a row */
     align-items: center; /* Vertically center the child elements */
     justify-content: space-between; /* Space out the child elements */
-    background: #d8d8d8;
+    gap: 20px; /* Adds spacing between horizontal items */ background: #d8d8d8;
+}
+
+div.dragableItemContent {
+    width: 75%; /* Automatically adjust width based on remaining space */
+    height: auto; /* Expand downwards when content grows */
+    min-height: 100%; /* Matches the height of the task div initially */
+    word-break: break-word;
+
 }

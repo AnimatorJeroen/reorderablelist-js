@@ -78,6 +78,11 @@ task {
     background: #d8d8d8;
 }
 
+taskContent {
+    display: flex;
+    align-items: center;
+}
+
 div.taskFrontDiv {
     position: relative; /* Use relative positioning for flex alignment */
     width: 50px; /* Fixed width */
@@ -85,14 +90,7 @@ div.taskFrontDiv {
     margin-right: auto; /* Push other elements to the right */
 }
 
-div.taskMidDiv {
-    width: 50%; /* Automatically adjust width based on remaining space */
-    height: auto; /* Expand downwards when content grows */
-    min-height: 100%; /* Matches the height of the task div initially */
-    background-color: white;
-    word-break: break-all;
 
-}
 
 div.taskEndDiv {
     display: flex;
@@ -100,6 +98,7 @@ div.taskEndDiv {
     width: 100px; /* Fixed width */
     height: 100%; /* Matches the height of the task div */
     margin-left: auto; /* Push other elements to the left */
+    gap: 10px;
 }
 
 .completed {
