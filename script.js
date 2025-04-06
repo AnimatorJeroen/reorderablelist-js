@@ -18,9 +18,9 @@ function addTask()
   const newTask = document.createElement("taskContent");
   newTask.innerHTML = 
   
-  `<input type="checkbox" class="check" id="checkbox" name="checkbox">
+  `<input type="checkbox" class="check" name="checkbox">
   <div class="grow-wrap">
-  <textarea name="text" class ="inputText" id="text" onInput="this.parentNode.dataset.replicatedValue = this.value"> ${taskName} </textarea>
+  <textarea name="text" class ="inputText" onInput="this.parentNode.dataset.replicatedValue = this.value"> ${taskName} </textarea>
   </div>`
 
   const reorderableItem = list.addElement(newTask);
