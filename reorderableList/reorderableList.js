@@ -81,7 +81,6 @@ export class ReorderableList
         this.#items.push(new ReorderableListItem(elem, this.#element));
         return this.#items.at(-1).getElement();
     }
-
 };
 
 class ReorderableListItem
@@ -100,8 +99,8 @@ class ReorderableListItem
 
         </div>
         <div class="dragableItemOptions" style="display: flex; justify-content: flex-end; align-items: center; gap: 10px;">
-        <a class="deleteButton" style="width: 25px; height: 25px; cursor: pointer"><img src="delete-icon.png" alt="Delete" style="width: 100%; height: 100%;" /></a>
-        <a class="dragButton" style="width: 50px; height: 50px; cursor: grab;"><img src="drag-icon.png" alt="Drag" style="width: 100%; height: 100%;" /></a>
+        <a class="deleteButton" style="width: 25px; height: 25px; cursor: pointer"><img src="reorderableList/delete-icon.png" alt="Delete" style="width: 100%; height: 100%;" /></a>
+        <a class="dragButton" style="width: 50px; height: 50px; cursor: grab;"><img src="reorderableList/drag-icon.png" alt="Drag" style="width: 100%; height: 100%;" /></a>
         </div>
         `;
         const taskMidDiv = newItem.querySelector(".dragableItemContent");

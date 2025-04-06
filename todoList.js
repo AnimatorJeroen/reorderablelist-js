@@ -1,4 +1,4 @@
-import { ReorderableList } from './reorderableList.js'
+import { ReorderableList } from './reorderableList/reorderableList.js'
 
 const taskInput = document.getElementById("taskInput");
 const addTaskButton = document.getElementById("addTaskBtn");
