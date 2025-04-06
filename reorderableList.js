@@ -1,3 +1,8 @@
+
+
+
+
+
 //////////////////////////inline styles//////////////////////
 // Dynamically inject styles for reorderableList
 function injectReorderableListStyles() {
@@ -280,3 +285,28 @@ findDropTarget(mouseY)
 
 
 
+
+
+/////// Example implementation //////////////////
+
+// this example shows how to add dragable items,
+// to a HTML element called: "testList"
+const htmlElement = document.getElementById("exampleList");
+if(htmlElement)
+{
+    const exampleList = new ReorderableList(htmlElement);
+    const elem1 = document.createElement("test1");
+    const elem2 = document.createElement("test2");
+    const elem3 = document.createElement("test3");
+    
+    elem1.innerHTML = `<div class="grow-wrap">
+    <textarea name="text" class ="inputText" id="text" onInput="this.parentNode.dataset.replicatedValue = this.value"> This is an example for input text inside a dragable list item.  </textarea>
+    </div>`
+    elem2.innerHTML = `<p> hello world! this is an example for text display inside a dragable list item </p>`
+
+    exampleList.addElement(elem1);
+    exampleList.addElement(elem2);
+    exampleList.addElement(elem3);
+
+}
+///////////////////////////////////////////////////
