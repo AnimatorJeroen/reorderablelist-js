@@ -1,22 +1,12 @@
-// import { addTask } from './dragdrop.js';
-
 import { ReorderableList } from './reorderableList.js'
 
 
 
 const taskInput = document.getElementById("taskInput");
 const addTaskButton = document.getElementById("addTaskBtn");
+const list = new ReorderableList(document.getElementById("taskList"));
 
-const list = new ReorderableList(document.getElementById("listTest"));
 
-const elem1 = document.createElement("test1");
-elem1.innerHTML = `<div class="grow-wrap">
-<textarea name="text" class ="inputText" id="text" onInput="this.parentNode.dataset.replicatedValue = this.value"> Text </textarea>
-</div>`
-const elem2 = document.createElement("test2");
-elem2.innerHTML = `<p> hello world! this is a test for text display inside a list element </p>`
-list.addElement(elem1);
-list.addElement(elem2);
 
 function addTask()
 {
@@ -24,21 +14,18 @@ function addTask()
   if (taskName == "")
     return;
 
-  //add elements
+  //add element content
   const newTask = document.createElement("taskContent");
   newTask.innerHTML = 
   
-  `
-  <input type="checkbox" class="check" id="checkbox" name="checkbox">
-  
+  `<input type="checkbox" class="check" id="checkbox" name="checkbox">
   <div class="grow-wrap">
   <textarea name="text" class ="inputText" id="text" onInput="this.parentNode.dataset.replicatedValue = this.value"> ${taskName} </textarea>
   </div>`
+
+  const reorderableItem = list.addElement(newTask);
   //add listener
-  newTask.querySelector(".check").addEventListener("click", () => { newTask.classList.toggle("completed"); });
-
-
-  list.addElement(newTask);
+  newTask.querySelector(".check").addEventListener("click", () => { reorderableItem.classList.toggle("completed"); });
 
   taskInput.value = "";
 }
@@ -61,4 +48,14 @@ addTaskButton.addEventListener("click", () => {addTask();})
 
 
 
+
+const testList = new ReorderableList(document.getElementById("testList"));
+const elem1 = document.createElement("test1");
+elem1.innerHTML = `<div class="grow-wrap">
+<textarea name="text" class ="inputText" id="text" onInput="this.parentNode.dataset.replicatedValue = this.value"> Text </textarea>
+</div>`
+const elem2 = document.createElement("test2");
+elem2.innerHTML = `<p> hello world! this is a test for text display inside a list element </p>`
+testList.addElement(elem1);
+testList.addElement(elem2);
 

@@ -1,4 +1,4 @@
-@import "reorderableListStyles.css"; /* Using a string */
+/* @import "reorderableListStyles.css"; */
 
 body {
     font-family: Arial, sans-serif;
@@ -83,51 +83,13 @@ taskContent {
     align-items: center;
 }
 
-div.taskFrontDiv {
-    position: relative; /* Use relative positioning for flex alignment */
-    width: 50px; /* Fixed width */
-    height: 100%; /* Matches the height of the task div */
-    margin-right: auto; /* Push other elements to the right */
-}
-
-
-
-div.taskEndDiv {
-    display: flex;
-    position: relative; /* Use relative positioning for flex alignment */
-    width: 100px; /* Fixed width */
-    height: 100%; /* Matches the height of the task div */
-    margin-left: auto; /* Push other elements to the left */
-    gap: 10px;
-}
-
 .completed {
     text-decoration: line-through;
     color: rgb(55, 90, 69);
     background: #d3ded3;
 }
 
-.dragging {
-    position:fixed;
-    width:"100px";
-    z-index: 9;
-    /* transform-origin: center right; */
-    rotate: -5deg;
-}
 
-.dragDummy {
-    background: #f3f3f3;
-    border: 4px dotted rgb(226, 226, 226);
-}
-
-dropTarget {
-    position: fixed;
-    top: 0; /* Adjust as needed to align with the intended position */
-    width: 100%;
-    height: 3px;
-    background-color: rgb(60, 114, 164);
-    z-index: 8;
-}
 
 
 /* snippet for an auto-growing textarea from https://codepen.io/chriscoyier/pen/XWKEVLy */

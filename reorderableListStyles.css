@@ -16,9 +16,31 @@ dragableListItem {
 }
 
 div.dragableItemContent {
-    width: 75%; /* Automatically adjust width based on remaining space */
+    width: 100%; /* Automatically adjust width based on remaining space */
     height: auto; /* Expand downwards when content grows */
     min-height: 100%; /* Matches the height of the task div initially */
     word-break: break-word;
 
+}
+
+.dragging {
+    position:fixed;
+    width:"100px";
+    z-index: 9;
+    /* transform-origin: center right; */
+    rotate: -5deg;
+}
+
+.dragDummy {
+    background: #f3f3f3;
+    border: 4px dotted rgb(226, 226, 226);
+}
+
+dropTarget {
+    position: fixed;
+    top: 0; /* Adjust as needed to align with the intended position */
+    width: 100%;
+    height: 3px;
+    background-color: rgb(60, 114, 164);
+    z-index: 8;
 }

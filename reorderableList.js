@@ -1,3 +1,68 @@
+//////////////////////////inline styles//////////////////////
+// Dynamically inject styles for reorderableList
+function injectReorderableListStyles() {
+    const styles = `
+      dragableListItem {
+          transition: all 0.3s ease; /* Smooth transition for all properties */
+          width: 80%; /* Takes 80% of the parent div's width */
+          min-height: 50px; /* Fixed height */
+          position: relative; /* For positioning child elements */
+          margin: auto; /* Center the task div horizontally */
+          border: 2px solid rgb(48, 48, 48);
+          padding: 10px;
+          overflow: auto;
+          display: flex; /* Arrange child elements in a row */
+          align-items: center; /* Vertically center the child elements */
+          justify-content: space-between; /* Space out the child elements */
+          gap: 20px; /* Adds spacing between horizontal items */
+          background: #d8d8d8;
+      }
+  
+      div.dragableItemContent {
+          width: 100%; /* Automatically adjust width based on remaining space */
+          height: auto; /* Expand downwards when content grows */
+          min-height: 100%; /* Matches the height of the task div initially */
+          word-break: break-word;
+      }
+  
+      .dragging {
+          position: fixed;
+          width: 100px;
+          z-index: 9;
+          rotate: -5deg;
+      }
+  
+      .dragDummy {
+          background: #f3f3f3;
+          border: 4px dotted rgb(226, 226, 226);
+      }
+  
+      dropTarget {
+          position: fixed;
+          top: 0; /* Adjust as needed to align with the intended position */
+          width: 100%;
+          height: 3px;
+          background-color: rgb(60, 114, 164);
+          z-index: 8;
+      }
+    `;
+  
+    // Create a <style> element
+    const styleSheet = document.createElement("style");
+    styleSheet.type = "text/css";
+    styleSheet.innerText = styles;
+  
+    // Append the <style> element to the <head>
+    document.head.appendChild(styleSheet);
+  }
+  
+  // Call the function to inject styles
+  injectReorderableListStyles();
+////////////////////////////////////////////////////////////
+
+
+
+
 export class ReorderableList
 {
     #element;
@@ -9,6 +74,7 @@ export class ReorderableList
     addElement(elem)
     {
         this.#items.push(new ReorderableListItem(elem, this.#element));
+        return this.#items.at(-1).getElement();
     }
 
 };
@@ -41,6 +107,8 @@ class ReorderableListItem
         newItem.querySelector(".deleteButton").addEventListener("click", () => { newItem.remove(); delete this; });
         newItem.querySelector(".dragButton").addEventListener("mousedown", (event) => { this.onDragBegin(event); });
     }
+    getElement() {return this.#element; }
+
 
     dragableListItemContent
     static dragging_startPosX;
@@ -157,7 +225,7 @@ class ReorderableListItem
     setTimeout(() => {
 
         if (this.target != null) {
-        console.log("place");
+
         this.#owningList.insertBefore(this.#element, this.isAbove ? this.target : this.target.nextSibling);
         }
 
@@ -179,7 +247,7 @@ findDropTarget(mouseY)
 {
   const tasks = Array.from(this.#owningList.children);
   for (const task of tasks) {
-    console.log("yPosition");
+    //console.log("yPosition");
     if(this.dropTargetLine == null)
         break;
 
@@ -199,11 +267,16 @@ findDropTarget(mouseY)
         this.yPosition = rect.top + rect.height + marginBottom/2 + "px";
         this.isAbove = false;
       }
-      console.log(this.isAbove);
-      console.log(this.yPosition);
+      //console.log(this.isAbove);
+      //console.log(this.yPosition);
       break;
     }
   }
 }
 
 }
+
+
+
+
+
