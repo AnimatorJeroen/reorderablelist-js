@@ -67,6 +67,14 @@ function injectReorderableListStyles() {
 ////////////////////////////////////////////////////////////
 
 
+function isTouchDevice() {
+    return (
+      'ontouchstart' in window ||
+      navigator.maxTouchPoints > 0 ||
+      window.matchMedia("(pointer: coarse)").matches
+    );
+  }
+  
 
 
 export class ReorderableList
@@ -110,7 +118,14 @@ class ReorderableListItem
 
         //add listeners
         newItem.querySelector(".deleteButton").addEventListener("click", () => { newItem.remove(); delete this; });
-        newItem.querySelector(".dragButton").addEventListener("mousedown", (event) => { this.onDragBegin(event); });
+
+        if(isTouchDevice()){
+            //
+        }
+        else {
+            newItem.querySelector(".dragButton").addEventListener("mousedown", (event) => { this.onDragBegin(event); });
+        }
+        
         //newItem.querySelector(".dragButton").addEventListener("touchstart", (event) => { this.onDragBegin(event); });
     }
     getElement() {return this.#element; }
@@ -175,8 +190,16 @@ class ReorderableListItem
       const mouseMoveHandler = (event) => { this.onDragMove(event); };
       const mouseUpHandler = (event) => { this.onDragEnd(event); document.removeEventListener("mousemove", mouseMoveHandler); document.removeEventListener("mouseup", mouseUpHandler); };
 
-      document.addEventListener("mousemove", mouseMoveHandler);
-      document.addEventListener("mouseup", mouseUpHandler);
+      if(isTouchDevice())
+      {
+
+      }
+      else
+      {
+        document.addEventListener("mousemove", mouseMoveHandler);
+        document.addEventListener("mouseup", mouseUpHandler);
+      }
+
     }
 
     onDragMove(event)
@@ -216,9 +239,6 @@ class ReorderableListItem
 
         if(this.dropTargetLine != null)
             this.dropTargetLine.remove();
-    document.onmousemove = null;
-    document.onmouseup = null;
-
 
     if(this.target != null)
     {
