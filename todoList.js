@@ -42,7 +42,11 @@ else
 
 addTaskButton.addEventListener("click", () => {addTask();})
 
-
+//examples
+taskInput.value = "Groceries";
+addTask();
+taskInput.value = "Vacuum the house";
+addTask();
 
 
 

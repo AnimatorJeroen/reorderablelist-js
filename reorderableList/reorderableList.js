@@ -20,6 +20,7 @@ function injectReorderableListStyles() {
           align-items: center; /* Vertically center the child elements */
           justify-content: space-between; /* Space out the child elements */
           gap: 20px; /* Adds spacing between horizontal items */
+          margin-bottom: 5px; /* Add vertical spacing between list items */
           background: #d8d8d8;
       }
   
@@ -301,7 +302,7 @@ if(htmlElement)
     elem1.innerHTML = `<div class="grow-wrap">
     <textarea name="text" class ="inputText" id="text" onInput="this.parentNode.dataset.replicatedValue = this.value"> This is an example for input text inside a dragable list item.  </textarea>
     </div>`
-    elem2.innerHTML = `<p> hello world! this is an example for text display inside a dragable list item </p>`
+    elem2.innerHTML = `<p> this is an example for text display inside a dragable list item </p>`
 
     exampleList.addElement(elem1);
     exampleList.addElement(elem2);

@@ -13,6 +13,7 @@ dragableListItem {
     align-items: center; /* Vertically center the child elements */
     justify-content: space-between; /* Space out the child elements */
     gap: 20px; /* Adds spacing between horizontal items */ background: #d8d8d8;
+    margin-bottom: 5px; /* Add vertical spacing between list items */
 }
 
 div.dragableItemContent {
