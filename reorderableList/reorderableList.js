@@ -183,7 +183,7 @@ class ReorderableListItem
       const mouseUpHandler = (event) => { this.onDragEnd(event); document.removeEventListener(isTouch ? "touchmove" : "mousemove", mouseMoveHandler); document.removeEventListener(isTouch ? "touchend" : "mouseup", mouseUpHandler); };
 
         document.addEventListener(isTouch ? "touchmove" : "mousemove", mouseMoveHandler);
-        document.addEventListener(isTouch ? "touchup" : "mouseup", mouseUpHandler);
+        document.addEventListener(isTouch ? "touchend" : "mouseup", mouseUpHandler);
     }
 
     onDragMove(event)
