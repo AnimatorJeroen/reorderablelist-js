@@ -184,22 +184,15 @@ class ReorderableListItem
       this.#element.style.top = (this.startOffsetTop) + "px"; 
       // Set the width of the element explicitly to maintain its size while dragging
       this.#element.style.width = computedStyleWidth;
-    
+
+      const isTouch = isTouchDevice();
       this.onDragMove(event);
 
       const mouseMoveHandler = (event) => { this.onDragMove(event); };
-      const mouseUpHandler = (event) => { this.onDragEnd(event); document.removeEventListener("mousemove", mouseMoveHandler); document.removeEventListener("mouseup", mouseUpHandler); };
+      const mouseUpHandler = (event) => { this.onDragEnd(event); document.removeEventListener(isTouch ? "touchmove" : "mousemove", mouseMoveHandler); document.removeEventListener(isTouch ? "touchend" : "mouseup", mouseUpHandler); };
 
-      if(isTouchDevice())
-      {
-
-      }
-      else
-      {
-        document.addEventListener("mousemove", mouseMoveHandler);
-        document.addEventListener("mouseup", mouseUpHandler);
-      }
-
+        document.addEventListener(isTouch ? "touchmove" : "mousemove", mouseMoveHandler);
+        document.addEventListener(isTouch ? "touchup" : "mouseup", mouseUpHandler);
     }
 
     onDragMove(event)
