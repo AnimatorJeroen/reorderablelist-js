@@ -1,7 +1,9 @@
 <h1> What? </h1>
 
 A simple js implementation for creating lists with drag-drop support.
-It's an experiment and has not been extensively tested so use at your own risk.
+It was quick experiment and has not been extensively tested so use at your own risk.
+
+See live demo here: https://animatorjeroen.github.io/reorderablelist-js/
 
 <h1> Usage </h1>
 
