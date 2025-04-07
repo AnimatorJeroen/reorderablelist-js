@@ -181,10 +181,10 @@ class ReorderableListItem
       this.onDragMove(event);
 
       const mouseMoveHandler = (event) => { this.onDragMove(event); };
-      const mouseUpHandler = (event) => { this.onDragEnd(event); document.removeEventListener(isTouch ? "touchmove" : "mousemove", mouseMoveHandler); document.removeEventListener(isTouch ? "touchend" : "mouseup", mouseUpHandler); };
+      const mouseUpHandler = (event) => { this.onDragEnd(event); document.removeEventListener(isTouchDevice() ? "touchmove" : "mousemove", mouseMoveHandler); document.removeEventListener(isTouchDevice() ? "touchend" : "mouseup", mouseUpHandler); };
 
-        document.addEventListener(isTouch ? "touchmove" : "mousemove", mouseMoveHandler);
-        document.addEventListener(isTouch ? "touchup" : "mouseup", mouseUpHandler);
+        document.addEventListener(isTouchDevice() ? "touchmove" : "mousemove", mouseMoveHandler);
+        document.addEventListener(isTouchDevice() ? "touchup" : "mouseup", mouseUpHandler);
     }
 
     onDragMove(event)
