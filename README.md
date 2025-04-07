@@ -1,6 +1,6 @@
 <h1> What? </h1>
 
-A simple js implementation for creating lists with drag-drop support.
+A simple js implementation for creating lists with animated drag-drop support.
 It was quick experiment and has not been extensively tested so use at your own risk.
 
 See live demo here: https://animatorjeroen.github.io/reorderablelist-js/
