@@ -111,6 +111,7 @@ class ReorderableListItem
         //add listeners
         newItem.querySelector(".deleteButton").addEventListener("click", () => { newItem.remove(); delete this; });
         newItem.querySelector(".dragButton").addEventListener("mousedown", (event) => { this.onDragBegin(event); });
+        //newItem.querySelector(".dragButton").addEventListener("touchstart", (event) => { this.onDragBegin(event); });
     }
     getElement() {return this.#element; }
 
@@ -170,8 +171,12 @@ class ReorderableListItem
       this.#element.style.width = computedStyleWidth;
     
       this.onDragMove(event);
-      document.onmousemove = (event) => { this.onDragMove(event); };
-      document.onmouseup = (event) => { this.onDragEnd(event); };
+
+      const mouseMoveHandler = (event) => { this.onDragMove(event); };
+      const mouseUpHandler = (event) => { this.onDragEnd(event); document.removeEventListener("mousemove", mouseMoveHandler); document.removeEventListener("mouseup", mouseUpHandler); };
+
+      document.addEventListener("mousemove", mouseMoveHandler);
+      document.addEventListener("mouseup", mouseUpHandler);
     }
 
     onDragMove(event)
