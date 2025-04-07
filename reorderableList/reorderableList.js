@@ -310,7 +310,7 @@ if(htmlElement)
     const elem3 = document.createElement("test3");
     
     elem1.innerHTML = `<div class="grow-wrap">
-    <textarea name="text" class ="inputText" id="text" onInput="this.parentNode.dataset.replicatedValue = this.value"> This is an example for input text inside a dragable list item.  </textarea>
+    <textarea name="text" class ="inputText" id="text" onInput="this.parentNode.dataset.replicatedValue = this.value"> 1. This is an example for input text inside a dragable list item.  </textarea>
     </div>`
     elem2.innerHTML = `<p> this is an example for text display inside a dragable list item </p>`
 
