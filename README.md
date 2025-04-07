@@ -43,3 +43,11 @@ if(htmlElement)
 
 todoList.js shows an implementation of reorderableList.js for a little todo list application.
 
+<h1> Attribution </h1>
+The delete-icon.png was created by Kiranshastry - Flaticon
+When using this icon, please add the following attribution in the footer:
+
+```html
+<a href="https://www.flaticon.com/free-icons/delete" title="delete icons">Delete icons created by Kiranshastry - Flaticon</a>
+```
+
