@@ -118,15 +118,7 @@ class ReorderableListItem
 
         //add listeners
         newItem.querySelector(".deleteButton").addEventListener("click", () => { newItem.remove(); delete this; });
-
-        if(isTouchDevice()){
-            //
-        }
-        else {
-            newItem.querySelector(".dragButton").addEventListener("mousedown", (event) => { this.onDragBegin(event); });
-        }
-        
-        //newItem.querySelector(".dragButton").addEventListener("touchstart", (event) => { this.onDragBegin(event); });
+        newItem.querySelector(".dragButton").addEventListener(isTouchDevice() ? "touchstart" : "mousedown", (event) => { this.onDragBegin(event); });
     }
     getElement() {return this.#element; }
 
