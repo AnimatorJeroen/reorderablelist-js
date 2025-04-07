@@ -74,8 +74,7 @@ function isTouchDevice() {
       window.matchMedia("(pointer: coarse)").matches
     );
   }
-  
-
+  const isTouch = isTouchDevice();
 
 export class ReorderableList
 {
@@ -171,20 +170,20 @@ class ReorderableListItem
     
     
       event.preventDefault();
-      this.dragging_startPosX = event.clientX;
-      this.dragging_startPosY = event.clientY;
+      this.dragging_startPosX = isTouch ? event.touches[0].clientX : event.clientX;
+      this.dragging_startPosY = isTouch ? event.touches[0].clientY : event.clientY;
       this.#element.style.top = (this.startOffsetTop) + "px"; 
       // Set the width of the element explicitly to maintain its size while dragging
       this.#element.style.width = computedStyleWidth;
 
-      const isTouch = isTouchDevice();
+      
       this.onDragMove(event);
 
       const mouseMoveHandler = (event) => { this.onDragMove(event); };
-      const mouseUpHandler = (event) => { this.onDragEnd(event); document.removeEventListener(isTouchDevice() ? "touchmove" : "mousemove", mouseMoveHandler); document.removeEventListener(isTouchDevice() ? "touchend" : "mouseup", mouseUpHandler); };
+      const mouseUpHandler = (event) => { this.onDragEnd(event); document.removeEventListener(isTouch ? "touchmove" : "mousemove", mouseMoveHandler); document.removeEventListener(isTouch ? "touchend" : "mouseup", mouseUpHandler); };
 
-        document.addEventListener(isTouchDevice() ? "touchmove" : "mousemove", mouseMoveHandler);
-        document.addEventListener(isTouchDevice() ? "touchup" : "mouseup", mouseUpHandler);
+        document.addEventListener(isTouch ? "touchmove" : "mousemove", mouseMoveHandler);
+        document.addEventListener(isTouch ? "touchup" : "mouseup", mouseUpHandler);
     }
 
     onDragMove(event)
@@ -192,13 +191,16 @@ class ReorderableListItem
         this.#element.style.transition ="none";
 
         event.preventDefault();
-        const dragDeltaX = event.clientX - this.dragging_startPosX;
-        const dragDeltaY = event.clientY - this.dragging_startPosY;
+        const eX = isTouch ? event.touches[0].clientX : event.clientX;
+        const eY = isTouch ? event.touches[0].clientY : event.clientY;
+
+        const dragDeltaX = eX - this.dragging_startPosX;
+        const dragDeltaY = eY - this.dragging_startPosY;
 
         this.#element.style.left = (this.startOffsetLeft + dragDeltaX) + "px";
         this.#element.style.top = (this.startOffsetTop + dragDeltaY) + "px";
 
-        const mouseY = event.clientY;
+        const mouseY = eY;
         this.findDropTarget(mouseY);
         if(this.target != null)
             this.dropTargetLine.style.top = this.yPosition;
